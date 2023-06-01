@@ -4,6 +4,7 @@ import Logout from "./Logout";
 import ChatInput from "./ChatInput";
 
 export default function ChatContainer({ currentChat }) {
+  const handleSendMsg = () => {};
   return (
     <>
       <Container>
@@ -19,7 +20,7 @@ export default function ChatContainer({ currentChat }) {
           <Logout />
         </div>
         <div className="chat-messages"></div>
-        <ChatInput />
+        <ChatInput handleSendMsg={handleSendMsg} />
       </Container>
     </>
   );

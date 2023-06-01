@@ -4,10 +4,16 @@ import styled from "styled-components";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoSend } from "react-icons/io5";
 
-export default function ChatInput() {
+export default function ChatInput({ handleSendMsg }) {
   const [msg, setMsg] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
-  const sendChat = (event) => {};
+  const sendChat = (event) => {
+    event.preventDefault();
+    if (msg.length > 0) {
+      handleSendMsg(msg);
+      setMsg("");
+    }
+  };
 
   const handlePicker = (event) => {
     setShowEmoji(!showEmoji);
@@ -43,7 +49,7 @@ export default function ChatInput() {
           onChange={(event) => setMsg(event.target.value)}
           value={msg}
         />
-        <button>
+        <button type="submit">
           <IoSend />
         </button>
       </form>
@@ -78,6 +84,11 @@ const Container = styled.div`
         bottom: 0;
         box-shadow: 0 5px 10px #9a86f3;
         --epr-emoji-size: 25px;
+        --epr-category-navigation-button-size: 25px;
+        --epr-category-padding: 0 5px;
+        --epr-header-padding: 7px 7px;
+        --epr-category-label-height: 30px;
+        --epr-category-label-padding: 0 5px;
         .epr-body::-webkit-scrollbar {
           width: 5px;
           &-thumb {
