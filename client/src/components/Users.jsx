@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Users() {
   const [userName, setUserName] = useState("");
   const [currentSelected, setCurrentSelected] = useState(undefined);
   const contacts = useSelector((state) => state.contacts);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getUser = async () => {
-      const data = await JSON.parse(localStorage.getItem("user-auth"));
-      setUserName(data.username);
+      if (!localStorage.getItem("user-auth")) {
+        navigate("/login");
+      } else {
+        const data = await JSON.parse(localStorage.getItem("user-auth"));
+        setUserName(data.username);
+      }
     };
     getUser();
   }, []);
