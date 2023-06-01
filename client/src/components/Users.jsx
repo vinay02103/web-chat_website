@@ -51,7 +51,7 @@ export default function Users({ handleCurrentChat }) {
           })}
         </div>
         <div className="current-user">
-          <div className="icon">{userName.charAt(0)}</div>
+          <div className="icon">{userName.charAt(0).toUpperCase()}</div>
           <div className="username">
             <h3>{userName}</h3>
           </div>
