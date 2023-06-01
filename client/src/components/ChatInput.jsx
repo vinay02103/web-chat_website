@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 import styled from "styled-components";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { IoSend } from "react-icons/io5";
@@ -13,9 +13,10 @@ export default function ChatInput() {
     setShowEmoji(!showEmoji);
   };
 
-  const handleEmoji = (event, emojiObject) => {
+  const handleEmoji = (emojiCode, event) => {
     let message = msg;
-    message += emojiObject.emoji;
+    console.log(emojiCode);
+    message += emojiCode.emoji;
     setMsg(message);
   };
 
@@ -25,7 +26,13 @@ export default function ChatInput() {
         <div className="emoji">
           <BsEmojiSmileFill onClick={handlePicker} />
           {showEmoji && (
-            <EmojiPicker onClickEmoji={handleEmoji} height={300} width={300} />
+            <EmojiPicker
+              onEmojiClick={handleEmoji}
+              height={300}
+              width={300}
+              previewConfig={{ showPreview: false }}
+              theme={Theme.AUTO}
+            />
           )}
         </div>
       </div>
@@ -59,21 +66,31 @@ const Container = styled.div`
     align-items: center;
     gap: 1rem;
     .emoji {
-      position: relative;
       svg {
         font-size: 1.5rem;
         color: #ffff00c8;
         cursor: pointer;
+        position: relative;
       }
       .EmojiPickerReact {
-        postition: absolute;
-        top: -350px;
+        position: absolute;
+        top: 225px;
+        bottom: 0;
         box-shadow: 0 5px 10px #9a86f3;
+        --epr-emoji-size: 25px;
+        .epr-body::-webkit-scrollbar {
+          width: 5px;
+          &-thumb {
+            background-color: #cbf078;
+            border-radius: 1rem;
+          }
+        }
       }
     }
   }
   .input-container {
     width: 100%;
+    position: relative;
     border-radius: 2rem;
     display: flex;
     align-items: center;
