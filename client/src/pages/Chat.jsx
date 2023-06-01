@@ -14,6 +14,7 @@ export default function Chat() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(undefined);
+  const [currentChat, setCurrentChat] = useState(undefined);
 
   useEffect(() => {
     const getUser = async () => {
@@ -38,12 +39,20 @@ export default function Chat() {
     handleContacts();
   }, [allUserRoute, currentUser, dispatch]);
 
+  const handleCurrentChat = (contact) => {
+    setCurrentChat(contact);
+  };
+
   return (
     <>
       <Container>
         <div className="container">
-          <Users />
-          <ChatContainer />
+          <Users handleCurrentChat={handleCurrentChat} />
+          {currentChat === undefined ? (
+            <div>Welcome!</div>
+          ) : (
+            <ChatContainer currentChat={currentChat} />
+          )}
         </div>
       </Container>
     </>

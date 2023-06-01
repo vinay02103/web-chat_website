@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-export default function Users() {
+export default function Users({ handleCurrentChat }) {
   const [userName, setUserName] = useState("");
   const [currentSelected, setCurrentSelected] = useState(undefined);
   const contacts = useSelector((state) => state.contacts);
@@ -23,6 +23,7 @@ export default function Users() {
 
   const changeCurrentChat = (contact, index) => {
     setCurrentSelected(index);
+    handleCurrentChat(contact);
   };
 
   return (
