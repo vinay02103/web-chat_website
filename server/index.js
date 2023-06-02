@@ -25,7 +25,7 @@ app.use("/api/chat", chatRoutes);
 const server = app.listen(port, () => console.log(`Server running at ${port}`));
 const io = socket(server, {
   cors: {
-    origin: "https://localhost:3000",
+    origin: "http://localhost:3000",
     credentials: true,
   },
 });
