@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import ChatContainer from "../components/ChatContainer";
@@ -6,6 +6,7 @@ import Users from "../components/Users";
 import { setContacts } from "../states/store";
 import { useDispatch } from "react-redux";
 import axios from "axios";
+import { io } from "socket.io-client";
 
 export default function Chat() {
   const host = "http://localhost:5000";
@@ -15,6 +16,7 @@ export default function Chat() {
   const dispatch = useDispatch();
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
+  const socket = useRef();
 
   useEffect(() => {
     const getUser = async () => {
@@ -26,6 +28,13 @@ export default function Chat() {
     };
     getUser();
   }, [navigate]);
+
+  useEffect(() => {
+    if (currentUser) {
+      socket.current = io(host);
+      socket.current.emit("add-user", currentUser._id);
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     const handleContacts = async () => {
@@ -51,7 +60,7 @@ export default function Chat() {
           {currentChat === undefined ? (
             <div>Welcome!</div>
           ) : (
-            <ChatContainer currentChat={currentChat} />
+            <ChatContainer currentChat={currentChat} socket={socket} />
           )}
         </div>
       </Container>
