@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -7,6 +7,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setAccount } from "../states/store";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import MultiSelect from "react-multiple-select-dropdown-lite";
+import "react-multiple-select-dropdown-lite/dist/index.css";
 
 export default function Register() {
   const host = "http://localhost:5000";
@@ -18,17 +20,31 @@ export default function Register() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [interests, setInterests] = useState([]);
+
+  const handleInterests = (val) => {
+    if (interests.includes(val)) {
+      const dup = interests.filter((interest) => interest !== val);
+      setInterests(dup);
+    } else {
+      setInterests([...interests, val]);
+    }
+  };
+
   const handleEvent = async (event) => {
     event.preventDefault();
+    const sendInterests = interests.at(-1).split(",");
 
     if (passwordValidation()) {
       const user = await axios.post(registerRoute, {
         username: account.username,
         email: account.email,
         password: password,
+        interests: sendInterests,
       });
 
       if (user.data) {
+        delete user.data.interests;
         localStorage.setItem("user-auth", JSON.stringify(user.data));
         navigate("/login");
       }
@@ -49,6 +65,15 @@ export default function Register() {
 
     return true;
   };
+
+  const options = [
+    { label: "Cricket", value: "cricket" },
+    { label: "Singing", value: "singing" },
+    { label: "Football", value: "football" },
+    { label: "K-pop", value: "k-pop" },
+    { label: "Dancing", value: "dancing" },
+    { label: "Tik-tok", value: "tik-tok" },
+  ];
 
   return (
     <>
@@ -80,6 +105,7 @@ export default function Register() {
             name="confirmPassword"
             onChange={(event) => onChange(event)}
           />
+          <MultiSelect onChange={handleInterests} options={options} />
 
           <button type="submit">Patch me In</button>
           <span>
@@ -127,7 +153,9 @@ const Form = styled.div`
       &.focus {
       }
     }
-
+    .msl-vars {
+      --menu-max-height: 150px;
+    }
     button {
       width: 60%;
       padding: 0.2rem;

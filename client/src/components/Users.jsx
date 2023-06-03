@@ -42,7 +42,7 @@ export default function Users({ handleCurrentChat }) {
                 }`}
                 onClick={() => changeCurrentChat(contact, index)}
               >
-                <div className="icon">{contact.username[0].toUpperCase()}</div>
+                <div className="icon">{contact.username.charAt(0)}</div>
                 <div className="username">
                   <h3>{contact.username}</h3>
                 </div>
@@ -51,7 +51,7 @@ export default function Users({ handleCurrentChat }) {
           })}
         </div>
         <div className="current-user">
-          <div className="icon">{userName.charAt(0).toUpperCase()}</div>
+          <div className="icon">{userName.charAt(0)}</div>
           <div className="username">
             <h3>{userName}</h3>
           </div>
@@ -66,6 +66,7 @@ const Container = styled.div`
   grid-template-rows: 10% 75% 15%;
   overflow: hidden;
   background-color: #a2a8d3;
+  border-radius: 20px 0px 0px 20px;
   .name {
     display: flex;
     align-items: center;

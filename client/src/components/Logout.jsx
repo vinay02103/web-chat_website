@@ -1,6 +1,5 @@
 import React from "react";
 import { TbLogout } from "react-icons/tb";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 

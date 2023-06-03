@@ -68,9 +68,7 @@ export default function ChatContainer({ currentChat, socket }) {
       <Container>
         <div className="chat-header">
           <div className="user-details">
-            <div className="icon">
-              {currentChat.username.charAt(0).toUpperCase()}
-            </div>
+            <div className="icon">{currentChat.username.charAt(0)}</div>
             <div className="username">
               <h3>{currentChat.username}</h3>
             </div>

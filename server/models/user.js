@@ -18,6 +18,7 @@ const userSchema = new mongoose.Schema({
   },
   interests: {
     type: Array,
+    required: true,
   },
 });
 

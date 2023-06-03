@@ -3,7 +3,7 @@ const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, interests } = req.body;
   const user = await User.findOne({ email });
 
   if (user) {
@@ -15,6 +15,7 @@ const register = async (req, res) => {
     username: username,
     email: email,
     password: hashedPassword,
+    interests: interests,
   });
 
   delete savedUser.password;
@@ -43,8 +44,22 @@ const allUsers = async (req, res, next) => {
       "_id",
       "email",
       "username",
+      "interests",
     ]);
-    return res.json(users);
+
+    const currentUser = await User.findById(req.params.id);
+
+    const receivedUsers = users;
+    const filteredUsers = receivedUsers.filter((user) => {
+      if (user.interests.length > 0) {
+        for (let interest in currentUser.interests) {
+          if (user.interests.includes(currentUser.interests[interest])) {
+            return user;
+          }
+        }
+      }
+    });
+    return res.json(filteredUsers);
   } catch (ex) {
     next(ex);
   }
