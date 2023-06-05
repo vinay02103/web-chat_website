@@ -63,6 +63,8 @@ const Container = styled.div`
   grid-template-columns: 5% 95%;
   background-color: #080420;
   padding: 0 2rem;
+  border-radius: 0px 0px 20px 0px;
+
   @media screen and (min-width: 720px) and (max-width: 1080px) {
     padding: 0 1rem;
     gap: 1rem;
@@ -81,7 +83,6 @@ const Container = styled.div`
       .EmojiPickerReact {
         position: absolute;
         top: 225px;
-        bottom: 0;
         box-shadow: 0 5px 10px #9a86f3;
         --epr-emoji-size: 25px;
         --epr-category-navigation-button-size: 25px;

@@ -2,11 +2,16 @@ import React from "react";
 import { TbLogout } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { useDispatch } from "react-redux";
+import { setLogOut } from "../states/store";
 
 export default function Logout() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const eventHandler = async () => {
     localStorage.removeItem("user-auth");
+    dispatch(setLogOut());
     navigate("/login");
   };
   return (

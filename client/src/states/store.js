@@ -27,8 +27,13 @@ export const authSlice = createSlice({
     setContacts: (state, action) => {
       state.contacts = action.payload;
     },
+    setLogOut: (state) => {
+      state.logIn = initialState;
+      state.account = initialState;
+    },
   },
 });
 
-export const { setAccount, setLogIn, setContacts } = authSlice.actions;
+export const { setAccount, setLogIn, setContacts, setLogOut } =
+  authSlice.actions;
 export default authSlice.reducer;

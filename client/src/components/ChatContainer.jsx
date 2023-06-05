@@ -117,11 +117,11 @@ const Container = styled.div`
       .icon {
         background-color: #66bfbf;
         border-radius: 50% 50%;
-        height: 40px;
-        width: 40px;
+        height: 35px;
+        width: 35px;
         font-size: 25px;
         text-align: center;
-        line-height: 40px;
+        line-height: 32px;
       }
     }
   }

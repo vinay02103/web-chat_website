@@ -7,6 +7,7 @@ import { setContacts } from "../states/store";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { io } from "socket.io-client";
+import Welcome from "../components/Welcome";
 
 export default function Chat() {
   const host = "http://localhost:5000";
@@ -58,7 +59,7 @@ export default function Chat() {
         <div className="container">
           <Users handleCurrentChat={handleCurrentChat} />
           {currentChat === undefined ? (
-            <div>Welcome!</div>
+            <Welcome />
           ) : (
             <ChatContainer currentChat={currentChat} socket={socket} />
           )}
@@ -83,6 +84,7 @@ const Container = styled.div`
     background-color: #385170;
     display: grid;
     border-radius: 20px;
+
     grid-template-columns: 25% 75%;
     @media screen and (min-width: 720px) and (max-width: 1080px) {
       grid-template-columns: 35% 65%;

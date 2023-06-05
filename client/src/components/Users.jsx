@@ -19,7 +19,7 @@ export default function Users({ handleCurrentChat }) {
       }
     };
     getUser();
-  }, []);
+  }, [navigate]);
 
   const changeCurrentChat = (contact, index) => {
     setCurrentSelected(index);
@@ -30,7 +30,7 @@ export default function Users({ handleCurrentChat }) {
     <>
       <Container>
         <div className="name">
-          <h1>Meet up!!</h1>
+          <h1>Meet ur Match</h1>
         </div>
         <div className="contacts">
           {contacts.map((contact, index) => {
@@ -67,10 +67,12 @@ const Container = styled.div`
   overflow: hidden;
   background-color: #a2a8d3;
   border-radius: 20px 0px 0px 20px;
+
   .name {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-size: 10px;
   }
   .contacts {
     display: flex;
@@ -101,11 +103,11 @@ const Container = styled.div`
       .icon {
         background-color: #66bfbf;
         border-radius: 50% 50%;
-        height: 50px;
-        width: 50px;
-        font-size: 35px;
+        height: 35px;
+        width: 35px;
+        font-size: 25px;
         text-align: center;
-        line-height: 50px;
+        line-height: 32px;
       }
     }
     .selected {
@@ -122,11 +124,11 @@ const Container = styled.div`
     .icon {
       background-color: #66bfbf;
       border-radius: 50% 50%;
-      height: 50px;
-      width: 50px;
-      font-size: 35px;
+      height: 35px;
+      width: 35px;
+      font-size: 30px;
       text-align: center;
-      line-height: 50px;
+      line-height: 32px;
     }
 
     @media screen and (min-width: 720px) and (max-width: 1080px) {

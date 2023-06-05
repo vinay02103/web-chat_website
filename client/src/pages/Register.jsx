@@ -105,7 +105,12 @@ export default function Register() {
             name="confirmPassword"
             onChange={(event) => onChange(event)}
           />
-          <MultiSelect onChange={handleInterests} options={options} />
+          <MultiSelect
+            onChange={handleInterests}
+            options={options}
+            placeholder="Choose ur Interests"
+            clearable={false}
+          />
 
           <button type="submit">Patch me In</button>
           <span>
@@ -126,7 +131,7 @@ const Form = styled.div`
   gap: 10rem;
   width: 100vw;
   height: 100vh;
-  background-color: #252525;
+  background-image: linear-gradient(45deg, #bc666d 0 79.8%, #b9e0e8 80% 100%);
 
   input::placeholder {
     font-family: Signika Negative, sans-serif;
@@ -136,7 +141,7 @@ const Form = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    background-color: #837482;
+    background-color: #fef1e6;
     padding: 3rem 2rem;
     border-radius: 13px;
 
@@ -155,6 +160,7 @@ const Form = styled.div`
     }
     .msl-vars {
       --menu-max-height: 150px;
+      --active-menu-background: #a7b9c4;
     }
     button {
       width: 60%;
@@ -162,6 +168,7 @@ const Form = styled.div`
       border-radius: 10px;
       border: none;
       cursor: pointer;
+      background-color: #305be3;
     }
   }
 `;
